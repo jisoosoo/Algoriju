@@ -14,6 +14,7 @@ class SaSangTest extends StatefulWidget {
 class _SaSangTestState extends State<SaSangTest> {
   int questionNum = 1;
   List<List<String>> questions = List.generate(16, (i) => ['']).toList();
+  int _idx = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -186,51 +187,36 @@ class _SaSangTestState extends State<SaSangTest> {
           ),
         ],
       ),
-      bottomNavigationBar: SizedBox(
-        height: 65,
-        child: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: (){},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  primary: Colors.transparent,
-                  onPrimary: Colors.black,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.home,
-                      size: 35,
-                    ),
-                    Text('Home'),
-                  ],
-                ),
-              ),
-              ElevatedButton(
-                onPressed: (){},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  primary: Colors.transparent,
-                  onPrimary: Colors.black,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.person,
-                      size: 35,
-                    ),
-                    Text('My Page'),
-                  ],
-                ),
-              ),
-            ],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 20,),
+            label: 'HOME',
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.thumb_up, size: 20,),
+            label: 'RECOMMEND',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt, size: 20,),
+            label: 'TEST',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person, size: 20,),
+            label: 'MY',
+          ),
+        ],
+        currentIndex: _idx,
+        onTap: (index){
+          setState(() {
+            _idx = index;
+          });
+        },
+        selectedItemColor: AppColor.selectedColor,
+        unselectedItemColor: Colors.black87,
+        showUnselectedLabels: true,
+        selectedFontSize: 12,
+        unselectedFontSize: 10,
       ),
     );
   }
