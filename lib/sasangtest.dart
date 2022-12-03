@@ -66,7 +66,15 @@ class _SaSangTestState extends State<SaSangTest> {
           ),
           const SizedBox(height: 20,),
           ElevatedButton(
-            onPressed: (){},
+            onPressed: (){
+              setState((){
+                if(questionNum<16){
+                  questionNum++;
+                } else if(questionNum==16){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
+                }
+              });
+            },
             style: ElevatedButton.styleFrom(
               primary: Colors.white,
               side: const BorderSide(
@@ -87,7 +95,15 @@ class _SaSangTestState extends State<SaSangTest> {
           ),
           const SizedBox(height: 20,),
           ElevatedButton(
-            onPressed: (){},
+            onPressed: (){
+              setState((){
+                if(questionNum<16){
+                  questionNum++;
+                } else if(questionNum==16){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
+                }
+              });
+            },
             style: ElevatedButton.styleFrom(
               primary: Colors.white,
               side: const BorderSide(
@@ -108,7 +124,15 @@ class _SaSangTestState extends State<SaSangTest> {
           ),
           const SizedBox(height: 20,),
           ElevatedButton(
-            onPressed: (){},
+            onPressed: (){
+              setState((){
+                if(questionNum<16){
+                  questionNum++;
+                } else if(questionNum==16){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
+                }
+              });
+            },
             style: ElevatedButton.styleFrom(
               primary: Colors.white,
               side: const BorderSide(
@@ -129,7 +153,15 @@ class _SaSangTestState extends State<SaSangTest> {
           ),
           const SizedBox(height: 20,),
           ElevatedButton(
-            onPressed: (){},
+            onPressed: (){
+              setState((){
+                if(questionNum<16){
+                  questionNum++;
+                } else if(questionNum==16){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
+                }
+              });
+            },
             style: ElevatedButton.styleFrom(
               primary: Colors.white,
               side: const BorderSide(
@@ -147,54 +179,6 @@ class _SaSangTestState extends State<SaSangTest> {
                 textAlign: TextAlign.center,
               ),
             ),
-          ),
-          const SizedBox(height: 35,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: (){
-                  setState(() {
-                    if(questionNum>1){
-                      questionNum--;
-                    }
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: AppColor.mainColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  padding: const EdgeInsets.all(8.0),
-                ),
-                child: Text(
-                  '이전',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: (){
-                  setState((){
-                    if(questionNum<16){
-                      questionNum++;
-                    }
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: AppColor.mainColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  padding: const EdgeInsets.all(8.0),
-                ),
-                child: Text(
-                  '다음',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
           ),
         ],
       ),

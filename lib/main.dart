@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:algoriju/style.dart';
+import 'package:algoriju/home.dart';
 import 'package:algoriju/sasangtest.dart';
+import 'package:algoriju/testresult.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,129 +21,28 @@ class MyApp extends StatelessWidget {
         backgroundColor: AppColor.mainColor,
         scaffoldBackgroundColor: AppColor.mainColor,
       ),
-      home: const HomePage(),
+      home: const Main(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class Main extends StatefulWidget {
+  const Main({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() {
-    return _HomePageState();
+  State<Main> createState() {
+    return _MainState();
   }
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainState extends State<Main> {
   int _idx = 0;
+  static List<Widget> pages = <Widget>[const HomePage(), const SaSangTest()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Image.asset(
-              'assets/images/icon.png',
-              height: 97,
-              width: 97,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          GestureDetector(
-            onTap: (){},
-            child: Container(
-              width: 293,
-              height: 124,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(left: 28.0),
-                    child: Text('나에게 맞는'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 24.0),
-                    child: Text(
-                      '전통주와 안주 추천',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 10,),
-          GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SaSangTest(),));
-            },
-            child: Container(
-              width: 293,
-              height: 124,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(left: 28.0),
-                    child: Text('재미로 보는'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 24.0),
-                    child: Text(
-                      '사상체질 테스트',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 10,),
-          GestureDetector(
-            onTap: (){},
-            child: Container(
-              width: 293,
-              height: 58,
-              alignment: Alignment.centerLeft,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.only(left: 28.0),
-                child: Text(
-                  '리뷰 보기',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: pages[_idx],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(

@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:algoriju/style.dart';
 
-class TestResult extends StatelessWidget {
-  TestResult({super.key, required this.title});
+class TestResult extends StatefulWidget {
+  const TestResult({Key? key}) : super(key: key);
 
-  final String title;
+  @override
+  State<TestResult> createState() => _TestResultState();
+}
+
+class _TestResultState extends State<TestResult> {
+  int _idx = 2;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          '',
-          style: const TextStyle(
+        title: const Text(
+          '사상체질 테스트 결과',
+          style: TextStyle(
             fontSize: 22,
             color: Colors.white,
           ),
@@ -20,108 +26,136 @@ class TestResult extends StatelessWidget {
         backgroundColor: AppColor.mainColor,
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
             height: 40,
           ),
-          const Text(
-            '나의 사상체질은',
-            style: TextStyle(
-              fontSize: 23,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 20,),
-
-          ElevatedButton(
-            onPressed: (){},
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              side: const BorderSide(
-                width: 2,
-                color: AppColor.mainColor,
-              ),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              padding: const EdgeInsets.all(8.0),
-            ),
-            child: SizedBox(
-              height: 30,
-              width: 300,
-              child: const Text('C',
-                style: TextStyle(fontSize: 20, height: 1.3,),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          const SizedBox(height: 20,),
-          ElevatedButton(
-            onPressed: (){},
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              side: const BorderSide(
-                width: 2,
-                color: AppColor.mainColor,
-              ),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              padding: const EdgeInsets.all(8.0),
-            ),
-            child: SizedBox(
-              height: 30,
-              width: 300,
-              child: const Text('D',
-                style: TextStyle(fontSize: 20, height: 1.3,),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: SizedBox(
-        height: 65,
-        child: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Column(
             children: [
-              ElevatedButton(
-                onPressed: (){},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  primary: Colors.transparent,
-                  onPrimary: Colors.black,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.home,
-                      size: 35,
-                    ),
-                    Text('Home'),
-                  ],
+              const Text(
+                '나의 사상체질은',
+                style: TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              ElevatedButton(
-                onPressed: (){},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  primary: Colors.transparent,
-                  onPrimary: Colors.black,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.person,
-                      size: 35,
-                    ),
-                    Text('My Page'),
-                  ],
+              Text(
+                '어쩌구',
+                style: TextStyle(
+                  color: AppColor.mainColor,
+                  fontSize: 45,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 18.0,
                 ),
               ),
             ],
           ),
-        ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  const Text(
+                    '어울리는 전통주',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Container(
+                    height: 109,
+                    width: 143,
+                    margin: const EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: AppColor.mainColor
+                      ),
+                      color: Colors.white,
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ㅇㅇㅇ',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: AppColor.mainColor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  const Text(
+                    '어울리는 안주',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Container(
+                    height: 109,
+                    width: 143,
+                    margin: const EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          color: AppColor.mainColor
+                      ),
+                      color: Colors.white,
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ㅇㅇㅇ',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: AppColor.mainColor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 20,),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 20,),
+            label: 'HOME',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.thumb_up, size: 20,),
+            label: 'RECOMMEND',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt, size: 20,),
+            label: 'TEST',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person, size: 20,),
+            label: 'MY',
+          ),
+        ],
+        currentIndex: _idx,
+        onTap: (index){
+          setState(() {
+            _idx = index;
+          });
+        },
+        backgroundColor: AppColor.mainColor,
+        selectedItemColor: AppColor.selectedColor,
+        unselectedItemColor: Colors.white,
+        showUnselectedLabels: true,
+        selectedFontSize: 10,
+        unselectedFontSize: 10,
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
