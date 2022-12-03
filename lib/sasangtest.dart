@@ -3,9 +3,7 @@ import 'package:algoriju/style.dart';
 import 'package:algoriju/testresult.dart';
 
 class SaSangTest extends StatefulWidget {
-  const SaSangTest({super.key, required this.title});
-
-  final String title;
+  const SaSangTest({Key? key}) : super(key: key);
 
   @override
   State<SaSangTest> createState() => _SaSangTestState();
@@ -14,15 +12,16 @@ class SaSangTest extends StatefulWidget {
 class _SaSangTestState extends State<SaSangTest> {
   int questionNum = 1;
   List<List<String>> questions = List.generate(16, (i) => ['']).toList();
-  int _idx = 1;
+  int _idx = 2;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: const TextStyle(
+        title: const Text(
+          '사상체질 테스트',
+          style: TextStyle(
             fontSize: 22,
             color: Colors.white,
           ),
@@ -154,7 +153,13 @@ class _SaSangTestState extends State<SaSangTest> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ElevatedButton(
-                onPressed: (){},
+                onPressed: (){
+                  setState(() {
+                    if(questionNum>1){
+                      questionNum--;
+                    }
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   primary: AppColor.mainColor,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -169,7 +174,13 @@ class _SaSangTestState extends State<SaSangTest> {
                 ),
               ),
               ElevatedButton(
-                onPressed: (){},
+                onPressed: (){
+                  setState((){
+                    if(questionNum<16){
+                      questionNum++;
+                    }
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   primary: AppColor.mainColor,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -212,11 +223,13 @@ class _SaSangTestState extends State<SaSangTest> {
             _idx = index;
           });
         },
+        backgroundColor: AppColor.mainColor,
         selectedItemColor: AppColor.selectedColor,
-        unselectedItemColor: Colors.black87,
+        unselectedItemColor: Colors.white,
         showUnselectedLabels: true,
-        selectedFontSize: 12,
+        selectedFontSize: 10,
         unselectedFontSize: 10,
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
