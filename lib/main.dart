@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:algoriju/style.dart';
 import 'package:algoriju/home.dart';
 import 'package:algoriju/sasangtest.dart';
+import 'package:algoriju/recommend.dart';
 import 'package:algoriju/testresult.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -37,7 +44,7 @@ class Main extends StatefulWidget {
 
 class _MainState extends State<Main> {
   int _idx = 0;
-  static List<Widget> pages = <Widget>[const HomePage(), const SaSangTest()];
+  static List<Widget> pages = <Widget>[const HomePage(), const RecommendPage(), const SaSangTest()];
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +55,14 @@ class _MainState extends State<Main> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home, size: 20,),
             label: 'HOME',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.thumb_up, size: 20,),
+            label: 'RECOMMEND',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt, size: 20,),
+            label: 'TEST',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person, size: 20,),

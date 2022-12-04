@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "130116297200",
+    "project_id": "algoriju-moapp",
+    "storage_bucket": "algoriju-moapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130116297200:android:80a7ba99a63ff2abfd7d35",
+        "android_client_info": {
+          "package_name": "com.example.algoriju"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130116297200-0g33shr3hj09pmql46s1hcjg43m46fot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATwamVk_ty8rsWZjfMgHZGTxhLp-tyPzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130116297200-0g33shr3hj09pmql46s1hcjg43m46fot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

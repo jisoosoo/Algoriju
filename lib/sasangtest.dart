@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:algoriju/style.dart';
 import 'package:algoriju/testresult.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SaSangTest extends StatefulWidget {
   const SaSangTest({Key? key}) : super(key: key);
@@ -10,12 +11,34 @@ class SaSangTest extends StatefulWidget {
 }
 
 class _SaSangTestState extends State<SaSangTest> {
-  int questionNum = 1;
-  List<List<String>> questions = List.generate(16, (i) => ['']).toList();
-  int _idx = 2;
+  int _questionNum = 1;
+  List<int> _result = [0,0,0,0];
+  String _taeYang = '';
+  String _taeEum = '';
+  String _soYang = '';
+  String _soEum = '';
+
+  void _next(){
+    if(_questionNum<15){
+      _questionNum++;
+    } else if(_questionNum==15){
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore f = FirebaseFirestore.instance;
+    late final _docs;
+
+    Future<void> _getQ() async {
+      await f.collection('sasangTest').doc('question').get().then(
+          (value) => _docs = value
+      );
+      _taeYang = _docs[0].data().collection('1')['1'].toString();
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -47,7 +70,7 @@ class _SaSangTestState extends State<SaSangTest> {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  '$questionNum',
+                  '$_questionNum',
                   style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,
@@ -68,11 +91,9 @@ class _SaSangTestState extends State<SaSangTest> {
           ElevatedButton(
             onPressed: (){
               setState((){
-                if(questionNum<16){
-                  questionNum++;
-                } else if(questionNum==16){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
-                }
+                _next();
+                _result[0]++;
+                _getQ();
               });
             },
             style: ElevatedButton.styleFrom(
@@ -87,8 +108,8 @@ class _SaSangTestState extends State<SaSangTest> {
             child: SizedBox(
               height: 30,
               width: 300,
-              child: const Text('A',
-                style: TextStyle(fontSize: 20, height: 1.3,),
+              child: Text(_taeYang,
+                style: const TextStyle(fontSize: 20, height: 1.3,),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -97,11 +118,9 @@ class _SaSangTestState extends State<SaSangTest> {
           ElevatedButton(
             onPressed: (){
               setState((){
-                if(questionNum<16){
-                  questionNum++;
-                } else if(questionNum==16){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
-                }
+                _next();
+                _result[1]++;
+                _getQ();
               });
             },
             style: ElevatedButton.styleFrom(
@@ -116,8 +135,8 @@ class _SaSangTestState extends State<SaSangTest> {
             child: SizedBox(
               height: 30,
               width: 300,
-              child: const Text('B',
-                style: TextStyle(fontSize: 20, height: 1.3,),
+              child: Text(_soYang,
+                style: const TextStyle(fontSize: 20, height: 1.3,),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -126,11 +145,9 @@ class _SaSangTestState extends State<SaSangTest> {
           ElevatedButton(
             onPressed: (){
               setState((){
-                if(questionNum<16){
-                  questionNum++;
-                } else if(questionNum==16){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
-                }
+                _next();
+                _result[2]++;
+                _getQ();
               });
             },
             style: ElevatedButton.styleFrom(
@@ -145,8 +162,8 @@ class _SaSangTestState extends State<SaSangTest> {
             child: SizedBox(
               height: 30,
               width: 300,
-              child: const Text('C',
-                style: TextStyle(fontSize: 20, height: 1.3,),
+              child: Text(_taeEum,
+                style: const TextStyle(fontSize: 20, height: 1.3,),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -155,11 +172,9 @@ class _SaSangTestState extends State<SaSangTest> {
           ElevatedButton(
             onPressed: (){
               setState((){
-                if(questionNum<16){
-                  questionNum++;
-                } else if(questionNum==16){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
-                }
+                _next();
+                _result[3]++;
+                _getQ();
               });
             },
             style: ElevatedButton.styleFrom(
@@ -174,46 +189,13 @@ class _SaSangTestState extends State<SaSangTest> {
             child: SizedBox(
               height: 30,
               width: 300,
-              child: const Text('D',
-                style: TextStyle(fontSize: 20, height: 1.3,),
+              child: Text(_soEum,
+                style: const TextStyle(fontSize: 20, height: 1.3,),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 20,),
-            label: 'HOME',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.thumb_up, size: 20,),
-            label: 'RECOMMEND',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt, size: 20,),
-            label: 'TEST',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, size: 20,),
-            label: 'MY',
-          ),
-        ],
-        currentIndex: _idx,
-        onTap: (index){
-          setState(() {
-            _idx = index;
-          });
-        },
-        backgroundColor: AppColor.mainColor,
-        selectedItemColor: AppColor.selectedColor,
-        unselectedItemColor: Colors.white,
-        showUnselectedLabels: true,
-        selectedFontSize: 10,
-        unselectedFontSize: 10,
-        type: BottomNavigationBarType.fixed,
       ),
     );
   }
