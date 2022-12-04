@@ -24,6 +24,12 @@ class _SaSangTestState extends State<SaSangTest> {
   var _soYang;
   var _soEum;
 
+  @override
+  void initState() {
+    super.initState();
+    _updateQ();
+  }
+
   Future<void> _updateQ() async {
     await f1.collection('sasangTest').doc('question').collection('Taeyang').doc('answer').get().then(
             (value){
