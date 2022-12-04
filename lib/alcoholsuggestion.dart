@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
-import 'alcohol.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'choosealcohol.dart';
 
 
 
@@ -39,10 +39,11 @@ class _AlcoholsuggestionFormState extends State<AlcoholsuggestionForm> {
         children: [
           Column(
             children: [
-              SizedBox(height: 100),
-              Text('알고리주의 추천 전통주'),
+              const SizedBox(height: 100),
+              const Text('알고리주의 추천 전통주', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+              const SizedBox(height: 15,),
               Container(
-                width: 200,
+                width: 300,
                 child: Column(
                   children: [
                     Text('alcohol'),
@@ -55,25 +56,24 @@ class _AlcoholsuggestionFormState extends State<AlcoholsuggestionForm> {
                     ),
                   ],
                 ),
-                padding: EdgeInsets.fromLTRB(10,20,10,20),
+                padding: EdgeInsets.fromLTRB(10,40,10,20),
                 decoration: BoxDecoration(
-                  color: Colors.red,
                   border: Border.all(
-                    color: Colors.black,
+                    color: Colors.red,
                   ),
                 ),
               ),
               SizedBox(height: 30),
-              Text("이 전통주에 어울리는 안주"),
+              const Text("이 전통주에 어울리는 안주", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+              const SizedBox(height: 20,),
               Container(
                 alignment: Alignment.center,
-                width: 200,
+                width: 300,
                 child: Text('안주'),
-                padding: EdgeInsets.fromLTRB(10,20,10,20),
+                padding: EdgeInsets.fromLTRB(10,30,10,20),
                 decoration: BoxDecoration(
-                  color: Colors.red,
                   border: Border.all(
-                    color: Colors.black,
+                    color: Colors.red,
                   ),
                 ),
               ),

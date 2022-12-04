@@ -1,240 +1,87 @@
 import 'package:flutter/material.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
-import 'alcoholsuggestion.dart';
 
-class AlcoholPage extends StatelessWidget {
-  const AlcoholPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '전통주와 안주 추천',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
-      ),
-      home: const AlcoholForm(title: '전통주와 안주 추천'),
-    );
+class Alcohol with ChangeNotifier {
+  String alcohol = "희양산 막걸리";
+  String food = "두부김치/도토리묵";
+  changeAlcohol0() {
+    alcohol = "희양산 막걸리";
+    food = "두부김치/도토리묵";
   }
-}
 
-class AlcoholForm extends StatefulWidget {
-
-  const AlcoholForm({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<AlcoholForm> createState() => _AlcoholFormState();
-}
-
-class _AlcoholFormState extends State<AlcoholForm> {
-  var sweet ='낮음';
-  var dosu = '낮음';
-  var type = '막걸리탁주';
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('전통주와 안주 추천'),
-
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.bottomLeft,
-                  child: ElevatedButton(
-                    child: Text('당도'),
-                    onPressed: () {},
-                  ),
-                ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      OutlinedButton(
-                          child: const Text('낮음'),
-                          onPressed: () {
-                            setState(() {
-                              if (sweet == '높음') {
-                                sweet = '낮음';
-                              }
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(60, 60),
-                            shape: const CircleBorder(),
-                          ),
-                      ),
-                      OutlinedButton(
-                        child: const Text('높음'),
-                        onPressed: () {
-                          setState(() {
-                            if (sweet == '낮음') {
-                              sweet = '높음';
-                              }
-                            });
-                          },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(60, 60),
-                          shape: const CircleBorder(),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            child: Divider(color: Colors.black, thickness: 2.0),
-          ),
-          Container(
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.bottomLeft,
-                  child: ElevatedButton(
-                    child: Text('도수'),
-                    onPressed: () {},
-                  ),
-                ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      OutlinedButton(
-                        child: const Text('낮음'),
-                        onPressed: () {
-                          setState(() {
-                            if (dosu == '높음') {
-                              dosu = '낮음';
-                            }
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(60, 60),
-                          shape: const CircleBorder(),
-                        ),
-                      ),
-                      OutlinedButton(
-                        child: const Text('높음'),
-                        onPressed: () {
-                          setState(() {
-                            if (dosu == '낮음') {
-                              dosu = '높음';
-                            }
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(60, 60),
-                          shape: const CircleBorder(),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            child: Divider(color: Colors.black, thickness: 2.0),
-          ),
-          Container(
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.bottomLeft,
-                  child: ElevatedButton(
-                    child: Text('주종'),
-                    onPressed: () {},
-                  ),
-                ),
-                Container(
-                  child: Row(
-
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      OutlinedButton(
-                        child: const Text('막걸리탁주'),
-                        onPressed: () {
-                          setState(() {
-                            if (type != '막걸리탁주') {
-                              type = '막걸리탁주';
-                              print(type);
-                            }
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(60, 60),
-                          shape: const CircleBorder(),
-                        ),
-                      ),
-                      OutlinedButton(
-                        child: const Text('약주청주'),
-                        onPressed: () {
-                          setState(() {
-                            if (type != '약주청주') {
-                              type = '약주청주';
-                              print(type);
-                            }
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(60, 60),
-                          shape: const CircleBorder(),
-                        ),
-                      ),
-                      OutlinedButton(
-                        child: const Text('증류주리큐르'),
-                        onPressed: () {
-                          setState(() {
-                            if (type != '증류주리큐르') {
-                              type = '증류주리큐르';
-                              print(type);
-                            }
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(60, 60),
-                          shape: const CircleBorder(),
-                        ),
-                      ),
-                      OutlinedButton(
-                        child: const Text('와인과일주'),
-                        onPressed: () {
-                          setState(() {
-                            if (type != '와인과일주') {
-                              type = '와인과일주';
-                              print(type);
-                            }
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(60, 60),
-                          shape: const CircleBorder(),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              print(sweet+dosu+type);
-              Navigator.push(context,
-              MaterialPageRoute(builder: (context)=>AlcoholsuggestionPage()));
-            },
-            child: Text('알고리주!'),
-          )
-        ],
-      ),
-    );
+  changeAlcohol1() {
+    alcohol = "한탄강 익스프레스";
+    food = "감자전/육전";
   }
+
+  changeAlcohol2() {
+    alcohol = "지란지교 무화과 탁주";
+    food = "제육볶음/돼지고기김치찜";
+  }
+
+  changeAlcohol3() {
+    alcohol = "골목막걸리 프리미엄";
+    food = "보쌈/생선구이";
+  }
+
+  changeAlcohol4() {
+    alcohol = "솔송주";
+    food = "돼지갈비/돼지갈비찜";
+  }
+
+  changeAlcohol5() {
+    alcohol = "녹파주";
+    food = "떡갈비/연잎밥";
+  }
+
+  changeAlcohol6() {
+    alcohol = "고흥유자주";
+    food = "샐러드/케이크";
+  }
+
+  changeAlcohol7() {
+    alcohol = "화전일취 백화";
+    food = "돼지고기수육/방어회";
+  }
+
+  changeAlcohol8() {
+    alcohol = "참조은 안동소주";
+    food = "고등어회/홍합탕";
+  }
+
+  changeAlcohol9() {
+    alcohol = "감홍로";
+    food = "치즈/육포";
+  }
+
+  changeAlcohol10() {
+    alcohol = "매실원주";
+    food = "곱창전골/빵";
+  }
+
+  changeAlcohol11() {
+    alcohol = "금과명주";
+    food = "돼지고기바비큐/다크초콜릿";
+  }
+
+  changeAlcohol12() {
+    alcohol = "댄싱파파";
+    food = "치킨/피자";
+  }
+
+  changeAlcohol13() {
+    alcohol = "혼디주";
+    food = "활어회/양념치킨";
+  }
+
+  changeAlcohol14() {
+    alcohol = "금이산농원 복숭아와인";
+    food = "샐러드/카나";
+  }
+
+  changeAlcohol15() {
+    alcohol = "The 찾을수록 애플";
+    food = "삼겹살/스낵";
+  }
+
 }
+

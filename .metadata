@@ -18,7 +18,11 @@ migration:
     - platform: android
       create_revision: 52b3dc25f6471c27b2144594abb11c741cb88f57
       base_revision: 52b3dc25f6471c27b2144594abb11c741cb88f57
+<<<<<<< HEAD
     - platform: web
+=======
+    - platform: ios
+>>>>>>> ff87001613ae57d511bb44ec13f834590f551c8a
       create_revision: 52b3dc25f6471c27b2144594abb11c741cb88f57
       base_revision: 52b3dc25f6471c27b2144594abb11c741cb88f57
 
