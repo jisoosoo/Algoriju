@@ -4,6 +4,7 @@ import 'package:algoriju/testresult.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'tests.dart';
 
 class SaSangTest extends StatefulWidget {
   const SaSangTest({Key? key}) : super(key: key);
@@ -27,41 +28,48 @@ class _SaSangTestState extends State<SaSangTest> {
   @override
   void initState() {
     super.initState();
+    _questionNum = 1;
     _updateQ();
   }
 
-  Future<void> _updateQ() async {
-    await f1.collection('sasangTest').doc('question').collection('Taeyang').doc('answer').get().then(
-            (value){
-          _taeYang = value;
-        }
+  void _updateQ() {
+    f1.collection('sasangTest').doc('question').collection('Taeyang').doc('answer').get().then(
+        (value){_taeYang = value; _questions[0] = _taeYang['${_questionNum+1}'];}
     );
-    await f2.collection('sasangTest').doc('question').collection('SoYang').doc('answer').get().then(
-            (value){
-          _soYang = value;
-        }
+    f2.collection('sasangTest').doc('question').collection('SoYang').doc('answer').get().then(
+        (value){_soYang = value; _questions[1] = _soYang['${_questionNum+1}'];}
     );
-    await f3.collection('sasangTest').doc('question').collection('TaeEum').doc('TaeEum').get().then(
-            (value){
-          _taeEum = value;
-        }
+    f3.collection('sasangTest').doc('question').collection('TaeEum').doc('TaeEum').get().then(
+        (value){_taeEum = value; _questions[2] = _taeEum['${_questionNum+1}'];}
     );
-    await f4.collection('sasangTest').doc('question').collection('SoEum').doc('answer').get().then(
-            (value){
-          _soEum = value;
-        }
+    f4.collection('sasangTest').doc('question').collection('SoEum').doc('answer').get().then(
+        (value){_soEum = value; _questions[3] = _soEum['${_questionNum+1}'];}
     );
+    print(_questionNum);
   }
 
-  void _next(){
-    _updateQ();
+  void _next(int i){
+    switch(i){
+      case 1:
+        context.read<Tests>().inc1();
+        break;
+      case 2:
+        context.read<Tests>().inc2();
+        break;
+      case 3:
+        context.read<Tests>().inc3();
+        break;
+      case 4:
+        context.read<Tests>().inc4();
+        break;
+    }
     if(_questionNum<14){
       _questionNum++;
+      _updateQ();
     } else if(_questionNum==14){
-      context.watch()._setResults();
+      context.read<Tests>().setResult();
       Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
     }
-    _questions = [_taeYang['$_questionNum'], _soYang['$_questionNum'], _taeEum['$_questionNum'], _soEum['$_questionNum']];
   }
 
   @override
@@ -118,8 +126,7 @@ class _SaSangTestState extends State<SaSangTest> {
           ElevatedButton(
             onPressed: (){
               setState((){
-                _next();
-                context.watch().results[0]++;
+                _next(1);
               });
             },
             style: ElevatedButton.styleFrom(
@@ -144,8 +151,7 @@ class _SaSangTestState extends State<SaSangTest> {
           ElevatedButton(
             onPressed: (){
               setState((){
-                _next();
-                context.watch().results[1]++;
+                _next(2);
               });
             },
             style: ElevatedButton.styleFrom(
@@ -170,8 +176,7 @@ class _SaSangTestState extends State<SaSangTest> {
           ElevatedButton(
             onPressed: (){
               setState((){
-                _next();
-                context.watch().results[2]++;
+                _next(3);
               });
             },
             style: ElevatedButton.styleFrom(
@@ -196,8 +201,7 @@ class _SaSangTestState extends State<SaSangTest> {
           ElevatedButton(
             onPressed: (){
               setState((){
-                _next();
-                context.watch().results[3]++;
+                _next(4);
               });
             },
             style: ElevatedButton.styleFrom(

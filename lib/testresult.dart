@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:algoriju/style.dart';
 import 'package:provider/provider.dart';
 import 'tests.dart';
-import 'dart:math';
 
 class TestResult extends StatefulWidget {
   const TestResult({Key? key}) : super(key: key);
@@ -126,39 +125,6 @@ class _TestResultState extends State<TestResult> {
           ),
           const SizedBox(height: 20,),
         ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 20,),
-            label: 'HOME',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.thumb_up, size: 20,),
-            label: 'RECOMMEND',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt, size: 20,),
-            label: 'TEST',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, size: 20,),
-            label: 'MY',
-          ),
-        ],
-        currentIndex: _idx,
-        onTap: (index){
-          setState(() {
-            _idx = index;
-          });
-        },
-        backgroundColor: AppColor.mainColor,
-        selectedItemColor: AppColor.selectedColor,
-        unselectedItemColor: Colors.white,
-        showUnselectedLabels: true,
-        selectedFontSize: 10,
-        unselectedFontSize: 10,
-        type: BottomNavigationBarType.fixed,
       ),
     );
   }

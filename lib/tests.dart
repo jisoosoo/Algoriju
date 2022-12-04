@@ -7,7 +7,27 @@ class Tests with ChangeNotifier {
   String drinks = '';
   String food = '';
 
-  void _setResult() {
+  void inc1(){
+    types[0]++;
+    notifyListeners();
+  }
+
+  void inc2(){
+    types[1]++;
+    notifyListeners();
+  }
+
+  void inc3(){
+    types[2]++;
+    notifyListeners();
+  }
+
+  void inc4(){
+    types[3]++;
+    notifyListeners();
+  }
+
+  void setResult() {
     int midx = 0;
     for (int i = 0; i < 4; i++) {
       if (types[i] > types[midx]) {
@@ -42,5 +62,6 @@ class Tests with ChangeNotifier {
         food = '삼계탕';
         break;
     }
+    notifyListeners();
   }
 }
