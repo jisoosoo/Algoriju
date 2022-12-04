@@ -81,7 +81,7 @@ class _TestResultState extends State<TestResult> {
                     child: Text(
                       context.read<Tests>().drinks,
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 17,
                         fontWeight: FontWeight.w800,
                         color: AppColor.mainColor,
                       ),
@@ -113,7 +113,7 @@ class _TestResultState extends State<TestResult> {
                     child: Text(
                       context.read<Tests>().food,
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 17,
                         fontWeight: FontWeight.w800,
                         color: AppColor.mainColor,
                       ),

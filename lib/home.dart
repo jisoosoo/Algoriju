@@ -18,103 +18,39 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Image.asset(
                 'assets/images/icon.png',
-                height: 97,
-                width: 97,
+                height: 135,
+                width: 135,
               ),
             ),
             const SizedBox(
               height: 30,
             ),
-            GestureDetector(
-              onTap: (){},
-              child: Container(
-                width: 293,
-                height: 124,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.only(left: 28.0),
-                      child: Text('나에게 맞는'),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 24.0),
-                      child: Text(
-                        '전통주와 안주 추천',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+            const Text(
+              '사상체질 기반 전통주 추천 서비스',
+              style: TextStyle(
+                color: Colors.white,
               ),
             ),
-            const SizedBox(height: 10,),
-            GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SaSangTest(),));
-              },
-              child: Container(
-                width: 293,
-                height: 124,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.only(left: 28.0),
-                      child: Text('재미로 보는'),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 24.0),
-                      child: Text(
-                        '사상체질 테스트',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+            const Text(
+              '알고리주',
+              style: TextStyle(
+                fontSize: 70,
+                fontWeight: FontWeight.w900,
+                color: AppColor.selectedColor,
               ),
             ),
-            const SizedBox(height: 10,),
-            GestureDetector(
-              onTap: (){},
-              child: Container(
-                width: 293,
-                height: 58,
-                alignment: Alignment.centerLeft,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 28.0),
-                  child: Text(
-                    '리뷰 보기',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
+            const SizedBox(
+              height: 80,
+            ),
+            const Text(
+              '하단 버튼을 눌러 원하시는 서비스를 선택해주세요.',
+              style: TextStyle(
+                color: Colors.white,
               ),
             ),
           ],

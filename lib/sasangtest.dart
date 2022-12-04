@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:algoriju/style.dart';
 import 'package:algoriju/testresult.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'tests.dart';
@@ -45,7 +44,6 @@ class _SaSangTestState extends State<SaSangTest> {
     f4.collection('sasangTest').doc('question').collection('SoEum').doc('answer').get().then(
         (value){_soEum = value; _questions[3] = _soEum['${_questionNum+1}'];}
     );
-    print(_questionNum);
   }
 
   void _next(int i){

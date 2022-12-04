@@ -48,7 +48,7 @@ class Tests with ChangeNotifier {
         break;
       case 1:
         results = '소양인';
-        drinks = '지란지교 무화과 탁주';
+        drinks = '지란지교무화과주';
         food = '돼지고기 김치찜';
         break;
       case 2:

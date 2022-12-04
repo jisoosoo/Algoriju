@@ -6,7 +6,6 @@ import 'package:algoriju/style.dart';
 import 'package:algoriju/home.dart';
 import 'package:algoriju/sasangtest.dart';
 import 'package:algoriju/recommend.dart';
-import 'package:algoriju/testresult.dart';
 import 'package:algoriju/tests.dart';
 
 Future<void> main() async {
