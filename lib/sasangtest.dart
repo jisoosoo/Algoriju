@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:algoriju/style.dart';
 import 'package:algoriju/testresult.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SaSangTest extends StatefulWidget {
@@ -11,34 +12,54 @@ class SaSangTest extends StatefulWidget {
 }
 
 class _SaSangTestState extends State<SaSangTest> {
+  FirebaseFirestore f1 = FirebaseFirestore.instance;
+  FirebaseFirestore f2 = FirebaseFirestore.instance;
+  FirebaseFirestore f3 = FirebaseFirestore.instance;
+  FirebaseFirestore f4 = FirebaseFirestore.instance;
   int _questionNum = 1;
   List<int> _result = [0,0,0,0];
-  String _taeYang = '';
-  String _taeEum = '';
-  String _soYang = '';
-  String _soEum = '';
+  List<String> _questions = ['땀이 특별히 나는 편은 아니다', '땀이 잠잘 때만 많이 난다', '땀이 많이 나는 편이다', '땀이 잘 나지 않는 편이다'];
+  var _taeYang;
+  var _taeEum;
+  var _soYang;
+  var _soEum;
+
+  Future<void> _updateQ() async {
+    await f1.collection('sasangTest').doc('question').collection('Taeyang').doc('answer').get().then(
+            (value){
+          _taeYang = value;
+        }
+    );
+    await f2.collection('sasangTest').doc('question').collection('SoYang').doc('answer').get().then(
+            (value){
+          _soYang = value;
+        }
+    );
+    await f3.collection('sasangTest').doc('question').collection('TaeEum').doc('TaeEum').get().then(
+            (value){
+          _taeEum = value;
+        }
+    );
+    await f4.collection('sasangTest').doc('question').collection('SoEum').doc('answer').get().then(
+            (value){
+          _soEum = value;
+        }
+    );
+    _questions = [_taeYang['$_questionNum'], _soYang['$_questionNum'], _taeEum['$_questionNum'], _soEum['$_questionNum']];
+  }
 
   void _next(){
-    if(_questionNum<15){
+    _updateQ();
+    if(_questionNum<14){
       _questionNum++;
-    } else if(_questionNum==15){
-
+    } else if(_questionNum==14){
       Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
     }
+    _questions = [_taeYang['$_questionNum'], _soYang['$_questionNum'], _taeEum['$_questionNum'], _soEum['$_questionNum']];
   }
 
   @override
   Widget build(BuildContext context) {
-    FirebaseFirestore f = FirebaseFirestore.instance;
-    late final _docs;
-
-    Future<void> _getQ() async {
-      await f.collection('sasangTest').doc('question').get().then(
-          (value) => _docs = value
-      );
-      _taeYang = _docs[0].data().collection('1')['1'].toString();
-    }
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -93,7 +114,6 @@ class _SaSangTestState extends State<SaSangTest> {
               setState((){
                 _next();
                 _result[0]++;
-                _getQ();
               });
             },
             style: ElevatedButton.styleFrom(
@@ -108,7 +128,7 @@ class _SaSangTestState extends State<SaSangTest> {
             child: SizedBox(
               height: 30,
               width: 300,
-              child: Text(_taeYang,
+              child: Text(_questions[0],
                 style: const TextStyle(fontSize: 20, height: 1.3,),
                 textAlign: TextAlign.center,
               ),
@@ -120,7 +140,6 @@ class _SaSangTestState extends State<SaSangTest> {
               setState((){
                 _next();
                 _result[1]++;
-                _getQ();
               });
             },
             style: ElevatedButton.styleFrom(
@@ -135,7 +154,7 @@ class _SaSangTestState extends State<SaSangTest> {
             child: SizedBox(
               height: 30,
               width: 300,
-              child: Text(_soYang,
+              child: Text(_questions[1],
                 style: const TextStyle(fontSize: 20, height: 1.3,),
                 textAlign: TextAlign.center,
               ),
@@ -147,7 +166,6 @@ class _SaSangTestState extends State<SaSangTest> {
               setState((){
                 _next();
                 _result[2]++;
-                _getQ();
               });
             },
             style: ElevatedButton.styleFrom(
@@ -162,7 +180,7 @@ class _SaSangTestState extends State<SaSangTest> {
             child: SizedBox(
               height: 30,
               width: 300,
-              child: Text(_taeEum,
+              child: Text(_questions[2],
                 style: const TextStyle(fontSize: 20, height: 1.3,),
                 textAlign: TextAlign.center,
               ),
@@ -174,7 +192,6 @@ class _SaSangTestState extends State<SaSangTest> {
               setState((){
                 _next();
                 _result[3]++;
-                _getQ();
               });
             },
             style: ElevatedButton.styleFrom(
@@ -189,7 +206,7 @@ class _SaSangTestState extends State<SaSangTest> {
             child: SizedBox(
               height: 30,
               width: 300,
-              child: Text(_soEum,
+              child: Text(_questions[3],
                 style: const TextStyle(fontSize: 20, height: 1.3,),
                 textAlign: TextAlign.center,
               ),
