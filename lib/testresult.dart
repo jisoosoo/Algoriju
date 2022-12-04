@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:algoriju/style.dart';
+import 'package:provider/provider.dart';
+import 'tests.dart';
+import 'dart:math';
 
 class TestResult extends StatefulWidget {
   const TestResult({Key? key}) : super(key: key);
@@ -42,7 +45,7 @@ class _TestResultState extends State<TestResult> {
                 ),
               ),
               Text(
-                '어쩌구',
+                context.read<Tests>().results,
                 style: TextStyle(
                   color: AppColor.mainColor,
                   fontSize: 45,
@@ -77,7 +80,7 @@ class _TestResultState extends State<TestResult> {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      'ㅇㅇㅇ',
+                      context.read<Tests>().drinks,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w800,
@@ -109,7 +112,7 @@ class _TestResultState extends State<TestResult> {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      'ㅇㅇㅇ',
+                      context.read<Tests>().food,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w800,

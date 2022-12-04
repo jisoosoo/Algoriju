@@ -3,6 +3,7 @@ import 'package:algoriju/style.dart';
 import 'package:algoriju/testresult.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
 class SaSangTest extends StatefulWidget {
   const SaSangTest({Key? key}) : super(key: key);
@@ -17,7 +18,6 @@ class _SaSangTestState extends State<SaSangTest> {
   FirebaseFirestore f3 = FirebaseFirestore.instance;
   FirebaseFirestore f4 = FirebaseFirestore.instance;
   int _questionNum = 1;
-  List<int> _result = [0,0,0,0];
   List<String> _questions = ['땀이 특별히 나는 편은 아니다', '땀이 잠잘 때만 많이 난다', '땀이 많이 나는 편이다', '땀이 잘 나지 않는 편이다'];
   var _taeYang;
   var _taeEum;
@@ -51,7 +51,6 @@ class _SaSangTestState extends State<SaSangTest> {
           _soEum = value;
         }
     );
-    _questions = [_taeYang['$_questionNum'], _soYang['$_questionNum'], _taeEum['$_questionNum'], _soEum['$_questionNum']];
   }
 
   void _next(){
@@ -59,6 +58,7 @@ class _SaSangTestState extends State<SaSangTest> {
     if(_questionNum<14){
       _questionNum++;
     } else if(_questionNum==14){
+      context.watch()._setResults();
       Navigator.push(context, MaterialPageRoute(builder: (context) => const TestResult()));
     }
     _questions = [_taeYang['$_questionNum'], _soYang['$_questionNum'], _taeEum['$_questionNum'], _soEum['$_questionNum']];
@@ -119,7 +119,7 @@ class _SaSangTestState extends State<SaSangTest> {
             onPressed: (){
               setState((){
                 _next();
-                _result[0]++;
+                context.watch().results[0]++;
               });
             },
             style: ElevatedButton.styleFrom(
@@ -145,7 +145,7 @@ class _SaSangTestState extends State<SaSangTest> {
             onPressed: (){
               setState((){
                 _next();
-                _result[1]++;
+                context.watch().results[1]++;
               });
             },
             style: ElevatedButton.styleFrom(
@@ -171,7 +171,7 @@ class _SaSangTestState extends State<SaSangTest> {
             onPressed: (){
               setState((){
                 _next();
-                _result[2]++;
+                context.watch().results[2]++;
               });
             },
             style: ElevatedButton.styleFrom(
@@ -197,7 +197,7 @@ class _SaSangTestState extends State<SaSangTest> {
             onPressed: (){
               setState((){
                 _next();
-                _result[3]++;
+                context.watch().results[3]++;
               });
             },
             style: ElevatedButton.styleFrom(

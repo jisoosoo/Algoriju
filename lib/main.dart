@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:provider/provider.dart';
 import 'package:algoriju/style.dart';
 import 'package:algoriju/home.dart';
 import 'package:algoriju/sasangtest.dart';
 import 'package:algoriju/recommend.dart';
 import 'package:algoriju/testresult.dart';
+import 'package:algoriju/tests.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,14 +23,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Algoriju',
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        backgroundColor: AppColor.mainColor,
-        scaffoldBackgroundColor: AppColor.mainColor,
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => Tests(),
+      builder: (context, child) => MaterialApp(
+        title: 'Algoriju',
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+          backgroundColor: AppColor.mainColor,
+          scaffoldBackgroundColor: AppColor.mainColor,
+        ),
+        home: const Main(),
       ),
-      home: const Main(),
     );
   }
 }
