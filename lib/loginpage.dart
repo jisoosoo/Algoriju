@@ -1,8 +1,8 @@
-import 'package:algoriju/SuccessLogin.dart';
 import 'package:algoriju/registerpage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'style.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -10,8 +10,16 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text(
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+          ),
+          "로그인",
+        ),
+        backgroundColor: AppColor.mainColor,
       ),
       body: const LoginForm(),
     );
@@ -57,7 +65,7 @@ class _LoginFormState extends State<LoginForm> {
         child: ListView(
           children: [
             TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Email",
               ),
               onChanged: (value) {
@@ -69,7 +77,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
             TextFormField(
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Password",
               ),
               onChanged: (value) {
@@ -77,10 +85,15 @@ class _LoginFormState extends State<LoginForm> {
               },
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             ElevatedButton(
-                onPressed: () async {
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColor.mainColor,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                padding: const EdgeInsets.all(12.0),
+              ),
+              onPressed: () async {
                   try{
                     final currentUser = await _authentication.signInWithEmailAndPassword(email: email, password: password);
                     if (currentUser.user != null) {
@@ -90,18 +103,28 @@ class _LoginFormState extends State<LoginForm> {
                   } catch (e) {
                     print(e);
                   }
-                },
-                child: const Text("Enter"),
+              },
+              child: const Text(
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  "입력",
+              ),
+            ),
+            const SizedBox(
+              height: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const Text("If you did not register, "),
+                const Text("아직 회원가입을 하지 않았다면, "),
                 TextButton(
                     onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterPage()));
                     },
-                    child: const Text("Register your account"),
+                    child: const Text("이곳에서 회원가입하세요."),
                 ),
               ],
             ),

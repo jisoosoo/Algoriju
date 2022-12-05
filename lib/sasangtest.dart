@@ -4,6 +4,7 @@ import 'package:algoriju/testresult.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'tests.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SaSangTest extends StatefulWidget {
   const SaSangTest({Key? key}) : super(key: key);
@@ -83,6 +84,14 @@ class _SaSangTestState extends State<SaSangTest> {
           ),
         ),
         backgroundColor: AppColor.mainColor,
+        actions: [
+          IconButton(
+              onPressed: (){
+                FirebaseAuth.instance.signOut();
+              },
+              icon: const Icon(Icons.logout)
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -128,7 +137,7 @@ class _SaSangTestState extends State<SaSangTest> {
               });
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.white,
+              backgroundColor: AppColor.mainColor,
               side: const BorderSide(
                 width: 2,
                 color: AppColor.mainColor,
@@ -153,7 +162,7 @@ class _SaSangTestState extends State<SaSangTest> {
               });
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.white,
+              backgroundColor: Colors.white,
               side: const BorderSide(
                 width: 2,
                 color: AppColor.mainColor,
@@ -178,7 +187,7 @@ class _SaSangTestState extends State<SaSangTest> {
               });
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.white,
+              backgroundColor: AppColor.mainColor,
               side: const BorderSide(
                 width: 2,
                 color: AppColor.mainColor,
@@ -203,7 +212,7 @@ class _SaSangTestState extends State<SaSangTest> {
               });
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.white,
+              backgroundColor: AppColor.mainColor,
               side: const BorderSide(
                 width: 2,
                 color: AppColor.mainColor,

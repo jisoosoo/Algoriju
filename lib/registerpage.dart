@@ -2,6 +2,7 @@ import 'package:algoriju/SuccessRegister.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'style.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -9,8 +10,16 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Register"),
+        title: const Text(
+          "회원가입",
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: AppColor.mainColor,
       ),
       body: const RegisterForm(),
     );
@@ -39,8 +48,8 @@ class _RegisterFormState extends State<RegisterForm> {
         child: ListView(
           children: [
             TextFormField(
-              decoration: InputDecoration(
-                labelText: "Email",
+              decoration: const InputDecoration(
+                labelText: "이메일",
               ),
               onChanged: (value) {
                 email = value;
@@ -51,8 +60,8 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
             TextFormField(
               obscureText: true,
-              decoration: InputDecoration(
-                labelText: "Password",
+              decoration: const InputDecoration(
+                labelText: "비밀번호",
               ),
               onChanged: (value) {
                 password = value;
@@ -62,8 +71,8 @@ class _RegisterFormState extends State<RegisterForm> {
               height: 20,
             ),
             TextFormField(
-              decoration: InputDecoration(
-                labelText: "User Name",
+              decoration: const InputDecoration(
+                labelText: "이름",
               ),
               onChanged: (value) {
                 userName = value;
@@ -73,6 +82,11 @@ class _RegisterFormState extends State<RegisterForm> {
               height: 20,
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColor.mainColor,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                padding: const EdgeInsets.all(12.0),
+              ),
               onPressed: () async {
                 try{
                   final newUser = await _authentication.createUserWithEmailAndPassword(email: email, password: password);
@@ -90,17 +104,25 @@ class _RegisterFormState extends State<RegisterForm> {
                   print(e);
                 }
               },
-              child: const Text("Enter"),
+
+              child: const Text(
+                "입력",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const Text("Already registered, "),
+                const Text("이미 회원가입을 했다면, "),
                 TextButton(
                   onPressed: (){
                     Navigator.pop(context);
                   },
-                  child: const Text("Login"),
+                  child: const Text("로그인하기"),
                 ),
               ],
             ),

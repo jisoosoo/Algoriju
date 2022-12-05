@@ -5,8 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:algoriju/style.dart';
 import 'package:algoriju/home.dart';
 import 'package:algoriju/sasangtest.dart';
-import 'package:algoriju/recommend.dart';
 import 'package:algoriju/tests.dart';
+import 'alcohol.dart';
+import 'package:algoriju/choosealcohol.dart';
+import 'reviewpage.dart';
+import 'loginpage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,16 +25,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) => Tests(),
-      builder: (context, child) => MaterialApp(
-        title: 'Algoriju',
-        theme: ThemeData(
-          primarySwatch: Colors.grey,
-          backgroundColor: AppColor.mainColor,
-          scaffoldBackgroundColor: AppColor.mainColor,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) => Tests(),
         ),
-        home: const Main(),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => Alcohol(),
+        ),
+      ],
+      child: MaterialApp(
+          title: 'Algoriju',
+          theme: ThemeData(
+            primarySwatch: Colors.grey,
+            backgroundColor: AppColor.mainColor,
+            scaffoldBackgroundColor: AppColor.mainColor,
+          ),
+          home: const Main(),
       ),
     );
   }
@@ -48,7 +58,13 @@ class Main extends StatefulWidget {
 
 class _MainState extends State<Main> {
   int _idx = 0;
-  static List<Widget> pages = <Widget>[const HomePage(), const RecommendPage(), const SaSangTest()];
+  static List<Widget> pages = <Widget>[
+    const HomePage(),
+    const AlcoholPage(),
+    const SaSangTest(),
+    const ReviewPage(),
+    const LoginPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +83,10 @@ class _MainState extends State<Main> {
           BottomNavigationBarItem(
             icon: Icon(Icons.receipt, size: 20,),
             label: 'TEST',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message, size: 20,),
+            label: 'REVIEW',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person, size: 20,),

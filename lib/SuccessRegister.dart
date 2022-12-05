@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'style.dart';
 
 class SuccessRegisterPage extends StatelessWidget {
   const SuccessRegisterPage({Key? key}) : super(key: key);
@@ -6,14 +7,22 @@ class SuccessRegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Success Register"),
+        title: const Text(
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+          ),
+          "회원가입 완료",
+        ),
+        backgroundColor: AppColor.mainColor,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('You have successfully registered', style: TextStyle(fontSize: 20),),
+            const Text('회원가입이 완료되었습니다', style: TextStyle(fontSize: 20),),
             const SizedBox(
               height: 20,
             ),
@@ -21,7 +30,7 @@ class SuccessRegisterPage extends StatelessWidget {
                 onPressed: (){
                   Navigator.popUntil(context, (route) => route.isFirst);
                 },
-                child: const Text("Login"),
+                child: const Text("로그인하기"),
             ),
           ],
         ),

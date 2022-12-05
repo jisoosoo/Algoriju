@@ -1,21 +1,36 @@
 import 'package:algoriju/reviewpage.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'alcohol.dart';
+import 'package:algoriju/alcohol.dart';
+import 'style.dart';
 
 class SuggestAlcoholPage extends StatelessWidget {
-  SuggestAlcoholPage({Key? key}) : super(key: key);
+  const SuggestAlcoholPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("추천으로 돌아가기"),
+        title: const Text(
+          "추천으로 돌아가기",
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: AppColor.mainColor,
+        actions: [
+          IconButton(
+              onPressed: (){
+                FirebaseAuth.instance.signOut();
+              },
+              icon: const Icon(Icons.logout)
+          ),
+        ],
       ),
-      body: AlcoholSuggestion(),
+      body: const AlcoholSuggestion(),
     );
   }
 }
@@ -40,10 +55,10 @@ class _AlcoholSuggestionState extends State<AlcoholSuggestion> {
             const SizedBox(height: 15,),
             Container(
               width: 300,
-              padding: EdgeInsets.fromLTRB(10,40,10,20),
+              padding: const EdgeInsets.fromLTRB(10,40,10,20),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.red,
+                  color: AppColor.mainColor,
                   width: 5,
                 ),
                 borderRadius: BorderRadius.circular(18.0),
@@ -51,7 +66,9 @@ class _AlcoholSuggestionState extends State<AlcoholSuggestion> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(context.watch<Alcohol>().alcohol, style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.red,),),
+                  Text(context.watch<Alcohol>().alcohol,
+                    style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: AppColor.mainColor,),
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0),
                     child: Row(
@@ -60,15 +77,15 @@ class _AlcoholSuggestionState extends State<AlcoholSuggestion> {
                         Padding(
                           padding: const EdgeInsets.only(right: 16.0),
                           child: IconButton(
-                            icon: Icon(Icons.message),
+                            icon: const Icon(Icons.message),
                             onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewPage()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> const ReviewPage()));
                             },
                           )
                           //Icon(Icons.message),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 8.0),
                           child: Icon(Icons.shopping_basket),
                         ),
                       ],
@@ -83,14 +100,16 @@ class _AlcoholSuggestionState extends State<AlcoholSuggestion> {
             Container(
               alignment: Alignment.center,
               width: 300,
-              child: Text(context.watch<Alcohol>().food, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),),
-              padding: EdgeInsets.fromLTRB(10,30,10,30),
+              padding: const EdgeInsets.fromLTRB(10,30,10,30),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.red,
+                  color: AppColor.mainColor,
                   width: 5,
                 ),
                 borderRadius: BorderRadius.circular(18.0),
+              ),
+              child: Text(context.watch<Alcohol>().food,
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColor.mainColor,),
               ),
             ),
           ],

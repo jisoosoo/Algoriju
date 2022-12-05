@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:algoriju/style.dart';
 import 'package:provider/provider.dart';
 import 'tests.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TestResult extends StatefulWidget {
   const TestResult({Key? key}) : super(key: key);
@@ -11,8 +12,6 @@ class TestResult extends StatefulWidget {
 }
 
 class _TestResultState extends State<TestResult> {
-  int _idx = 2;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +25,14 @@ class _TestResultState extends State<TestResult> {
           ),
         ),
         backgroundColor: AppColor.mainColor,
+        actions: [
+          IconButton(
+            onPressed: (){
+              FirebaseAuth.instance.signOut();
+            },
+            icon: const Icon(Icons.logout)
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -45,7 +52,7 @@ class _TestResultState extends State<TestResult> {
               ),
               Text(
                 context.read<Tests>().results,
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColor.mainColor,
                   fontSize: 45,
                   fontWeight: FontWeight.w900,

@@ -2,7 +2,7 @@ import 'package:algoriju/reviewdetail.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'style.dart';
 
 class ReviewPage extends StatelessWidget {
   const ReviewPage({Key? key}) : super(key: key);
@@ -10,8 +10,16 @@ class ReviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("전통주 리뷰"),
+        title: const Text(
+          "전통주 리뷰",
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: AppColor.mainColor,
         actions: [
           IconButton(
               onPressed: (){
@@ -56,7 +64,7 @@ class ReviewList extends StatelessWidget {
                                   //Navigator에 ReviewDetailPage에 drinkName을 파라미터로 넘겨주기
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewDetailPage(drinkName)));
                                 },
-                                icon: Icon(Icons.arrow_forward_ios),
+                                icon: const Icon(Icons.arrow_forward_ios),
                             ),
                           ],
                         );

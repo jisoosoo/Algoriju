@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'style.dart';
 
 class WriteReviewPage extends StatelessWidget {
   String? drinkName = "";
@@ -10,8 +11,24 @@ class WriteReviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("리뷰 작성"),
+        title: const Text(
+          "리뷰 작성",
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: AppColor.mainColor,
+        actions: [
+          IconButton(
+              onPressed: (){
+                FirebaseAuth.instance.signOut();
+              },
+              icon: const Icon(Icons.logout)
+          ),
+        ],
       ),
       body: ReviewForm(drink: drinkName,),
     );
@@ -27,7 +44,6 @@ class ReviewForm extends StatefulWidget {
 
 class _ReviewFormState extends State<ReviewForm> {
   final _reviewController = TextEditingController();
-  final _authentication = FirebaseAuth.instance;
   String newReview = '';
 
 
@@ -45,7 +61,14 @@ class _ReviewFormState extends State<ReviewForm> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(drinkName!),
+          Text(
+            style: const TextStyle(
+              color: AppColor.mainColor,
+              fontWeight: FontWeight.w800,
+              fontSize: 24,
+            ),
+            drinkName!,
+          ),
           const SizedBox(
             height: 24,
           ),
@@ -63,12 +86,13 @@ class _ReviewFormState extends State<ReviewForm> {
                 minLines: 1,
                 maxLines: 20,
                 keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "리뷰를 작성해주세요",
                   hintStyle: TextStyle(
                     color: Colors.grey
                   ),
                   border: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColor.mainColor),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                 ),
@@ -84,7 +108,12 @@ class _ReviewFormState extends State<ReviewForm> {
             height: 20,
           ),
           ElevatedButton(
-              onPressed: newReview.trim().isEmpty ? null : () async {
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColor.mainColor,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              padding: const EdgeInsets.all(12.0),
+            ),
+            onPressed: newReview.trim().isEmpty ? null : () async {
                 final currentUser = FirebaseAuth.instance.currentUser;
                 final currentUserName = await FirebaseFirestore.instance.collection('user').doc(currentUser!.uid).get();
                 //final currentDrinkName = await FirebaseFirestore.instance.collection('Drink').doc('00').get();
@@ -98,8 +127,14 @@ class _ReviewFormState extends State<ReviewForm> {
                   // currentDrinkName.data()!['name'],
                 });
                 Navigator.pop(context);
-                },
-              child: const Text("작성 완료", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+            },
+            child: const Text("작성 완료",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
           ),
         ],
       ),

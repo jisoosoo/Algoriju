@@ -1,6 +1,7 @@
 import 'package:algoriju/writereview.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 //drinkName 파라미터를 넘겨받고 해당 파라미터에 속한 review들을 추출하여 보여줌
@@ -13,8 +14,24 @@ class ReviewDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("리뷰 상세"),
+        title: const Text(
+          "리뷰 상세",
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: AppColor.mainColor,
+        actions: [
+          IconButton(
+              onPressed: (){
+                FirebaseAuth.instance.signOut();
+              },
+              icon: const Icon(Icons.logout)
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -41,7 +58,7 @@ class ReviewDetailPage extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(18.0),
                                     border: Border.all(
-                                      color: Colors.red,
+                                      color: AppColor.mainColor,
                                     ),
                                   ),
                                   child: Center(
@@ -65,7 +82,7 @@ class ReviewDetailPage extends StatelessWidget {
                               ),
                             );
                           } else {
-                            return SizedBox(
+                            return const SizedBox(
                               height: 5,
                             );
                           }
@@ -81,8 +98,12 @@ class ReviewDetailPage extends StatelessWidget {
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context)=>WriteReviewPage(drinkName)));
         },
+        backgroundColor: AppColor.mainColor,
         tooltip: '글쓰기',
-        child: const Icon(Icons.border_color),
+        child: const Icon(
+          Icons.border_color,
+          color: Colors.white,
+        ),
       ),
     );
   }
