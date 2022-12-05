@@ -137,7 +137,7 @@ class _SaSangTestState extends State<SaSangTest> {
               });
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.mainColor,
+              backgroundColor: Colors.white,
               side: const BorderSide(
                 width: 2,
                 color: AppColor.mainColor,
@@ -187,7 +187,7 @@ class _SaSangTestState extends State<SaSangTest> {
               });
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.mainColor,
+              backgroundColor: Colors.white,
               side: const BorderSide(
                 width: 2,
                 color: AppColor.mainColor,
@@ -212,7 +212,7 @@ class _SaSangTestState extends State<SaSangTest> {
               });
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.mainColor,
+              backgroundColor: Colors.white,
               side: const BorderSide(
                 width: 2,
                 color: AppColor.mainColor,
