@@ -69,28 +69,6 @@ class _AlcoholSuggestionState extends State<AlcoholSuggestion> {
                   Text(context.watch<Alcohol>().alcohol,
                     style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: AppColor.mainColor,),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 16.0),
-                          child: IconButton(
-                            icon: const Icon(Icons.message),
-                            onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> const ReviewPage()));
-                            },
-                          )
-                          //Icon(Icons.message),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Icon(Icons.shopping_basket),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),

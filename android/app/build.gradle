@@ -22,12 +22,9 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
-<<<<<<< HEAD
-=======
 // START: FlutterFire Configuration
 apply plugin: 'com.google.gms.google-services'
 // END: FlutterFire Configuration
->>>>>>> ff87001613ae57d511bb44ec13f834590f551c8a
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -40,8 +37,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-<<<<<<< HEAD
-=======
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -50,7 +45,6 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
->>>>>>> ff87001613ae57d511bb44ec13f834590f551c8a
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.algoriju"
@@ -77,10 +71,7 @@ flutter {
 }
 
 dependencies {
-<<<<<<< HEAD
     implementation 'com.android.support:multidex:1.0.3'
-=======
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:multidex:1.0.3"
->>>>>>> ff87001613ae57d511bb44ec13f834590f551c8a
 }

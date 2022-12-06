@@ -10,6 +10,7 @@ import 'alcohol.dart';
 import 'package:algoriju/choosealcohol.dart';
 import 'reviewpage.dart';
 import 'loginpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +42,17 @@ class MyApp extends StatelessWidget {
             backgroundColor: AppColor.mainColor,
             scaffoldBackgroundColor: AppColor.mainColor,
           ),
-          home: const Main(),
+          home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context,snapshot){
+              if(snapshot.hasData){
+                return const Main();
+              }
+              else {
+                return const LoginPage();
+              }
+            },
+          )
       ),
     );
   }
@@ -63,7 +74,6 @@ class _MainState extends State<Main> {
     const AlcoholPage(),
     const SaSangTest(),
     const ReviewPage(),
-    const LoginPage(),
   ];
 
   @override
@@ -87,10 +97,6 @@ class _MainState extends State<Main> {
           BottomNavigationBarItem(
             icon: Icon(Icons.message, size: 20,),
             label: 'REVIEW',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, size: 20,),
-            label: 'MY',
           ),
         ],
         currentIndex: _idx,
