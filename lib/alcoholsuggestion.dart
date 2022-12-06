@@ -1,3 +1,4 @@
+import 'package:algoriju/style.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'choosealcohol.dart';
@@ -32,7 +33,7 @@ class _AlcoholsuggestionFormState extends State<AlcoholsuggestionForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
+        backgroundColor: AppColor.mainColor,
       ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,

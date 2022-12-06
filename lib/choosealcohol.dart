@@ -1,3 +1,4 @@
+import 'package:algoriju/style.dart';
 import 'package:algoriju/suggestedalcohol.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,6 @@ class AlcoholPage extends StatelessWidget {
     return MaterialApp(
       title: '전통주와 안주 추천',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
       home: const AlcoholForm(title: '전통주와 안주 추천'),
@@ -42,7 +42,7 @@ class _AlcoholFormState extends State<AlcoholForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text('전통주와 안주 추천'),
-
+        backgroundColor: AppColor.mainColor,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -56,12 +56,18 @@ class _AlcoholFormState extends State<AlcoholForm> {
                     padding: const EdgeInsets.fromLTRB(35.0, 0.0, 0.0, 10.0),
                     child: ElevatedButton(
                       child: Text('당도'),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          )
-                        )
+                      // style: ButtonStyle(
+                      //   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      //     RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(20.0),
+                      //     ),
+                      //   ),
+                      // ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        backgroundColor: AppColor.mainColor,
                       ),
                       onPressed: () {},
                     ),
@@ -89,12 +95,12 @@ class _AlcoholFormState extends State<AlcoholForm> {
                               if (sweet == "높음"){
                                 return Colors.white;
                               } else {
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               }
                             }),
                             foregroundColor: MaterialStateProperty.resolveWith((states){
                               if (sweet == "높음"){
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               }
                               else {
                                 return Colors.white;
@@ -120,12 +126,12 @@ class _AlcoholFormState extends State<AlcoholForm> {
                               if (sweet == "낮음"){
                                 return Colors.white;
                               } else {
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               }
                             }),
                             foregroundColor: MaterialStateProperty.resolveWith((states){
                               if (sweet == "낮음"){
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               }
                               else {
                                 return Colors.white;
@@ -152,12 +158,18 @@ class _AlcoholFormState extends State<AlcoholForm> {
                     child: ElevatedButton(
                       child: Text('도수'),
                       onPressed: () {},
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              )
-                          )
+                      // style: ButtonStyle(
+                      //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      //         RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(20.0),
+                      //         )
+                      //     )
+                      // ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        backgroundColor: AppColor.mainColor,
                       ),
                     ),
                   ),
@@ -186,12 +198,12 @@ class _AlcoholFormState extends State<AlcoholForm> {
                               if (dosu == "높음"){
                                 return Colors.white;
                               } else {
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               }
                             }),
                             foregroundColor: MaterialStateProperty.resolveWith((states){
                               if (dosu == "높음"){
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               }
                               else {
                                 return Colors.white;
@@ -219,12 +231,12 @@ class _AlcoholFormState extends State<AlcoholForm> {
                             if (dosu == "낮음"){
                               return Colors.white;
                             } else {
-                              return Colors.blue;
+                              return AppColor.mainColor;
                             }
                           }),
                           foregroundColor: MaterialStateProperty.resolveWith((states){
                             if (dosu == "낮음"){
-                              return Colors.blue;
+                              return AppColor.mainColor;
                             }
                             else {
                               return Colors.white;
@@ -256,12 +268,18 @@ class _AlcoholFormState extends State<AlcoholForm> {
                     child: ElevatedButton(
                       child: Text('주종'),
                       onPressed: () {},
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              )
-                          )
+                      // style: ButtonStyle(
+                      //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      //         RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(20.0),
+                      //         )
+                      //     )
+                      // ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        backgroundColor: AppColor.mainColor,
                       ),
                     ),
                   ),
@@ -296,7 +314,7 @@ class _AlcoholFormState extends State<AlcoholForm> {
                             ),
                             backgroundColor: MaterialStateProperty.resolveWith((states){
                               if (type == "막걸리탁주"){
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               } else {
                                 return Colors.white;
                               }
@@ -306,7 +324,7 @@ class _AlcoholFormState extends State<AlcoholForm> {
                                 return Colors.white;
                               }
                               else {
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               }
                             })
                         ),
@@ -336,7 +354,7 @@ class _AlcoholFormState extends State<AlcoholForm> {
                             ),
                             backgroundColor: MaterialStateProperty.resolveWith((states){
                               if (type == "약주청주"){
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               } else {
                                 return Colors.white;
                               }
@@ -346,7 +364,7 @@ class _AlcoholFormState extends State<AlcoholForm> {
                                 return Colors.white;
                               }
                               else {
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               }
                             })
                         ),
@@ -376,7 +394,7 @@ class _AlcoholFormState extends State<AlcoholForm> {
                             ),
                             backgroundColor: MaterialStateProperty.resolveWith((states){
                               if (type == "증류주리큐르"){
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               } else {
                                 return Colors.white;
                               }
@@ -386,7 +404,7 @@ class _AlcoholFormState extends State<AlcoholForm> {
                                 return Colors.white;
                               }
                               else {
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               }
                             })
                         ),
@@ -416,7 +434,7 @@ class _AlcoholFormState extends State<AlcoholForm> {
                             ),
                             backgroundColor: MaterialStateProperty.resolveWith((states){
                               if (type == "와인과일주"){
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               } else {
                                 return Colors.white;
                               }
@@ -426,7 +444,7 @@ class _AlcoholFormState extends State<AlcoholForm> {
                                 return Colors.white;
                               }
                               else {
-                                return Colors.blue;
+                                return AppColor.mainColor;
                               }
                             })
                         ),
@@ -494,6 +512,9 @@ class _AlcoholFormState extends State<AlcoholForm> {
               Navigator.push(context, MaterialPageRoute(builder: (context)=> SuggestAlcoholPage()));
             },
             child: Text('알고리주!'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColor.mainColor,
+            ),
           )
         ],
       ),
