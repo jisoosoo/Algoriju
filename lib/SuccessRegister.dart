@@ -1,3 +1,4 @@
+import 'package:algoriju/style.dart';
 import 'package:flutter/material.dart';
 
 class SuccessRegisterPage extends StatelessWidget {
@@ -6,8 +7,13 @@ class SuccessRegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Success Register"),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        title: const Text("Success Register", style: TextStyle(color: Colors.white),),
+        backgroundColor: AppColor.mainColor,
       ),
       body: Center(
         child: Column(
@@ -21,7 +27,10 @@ class SuccessRegisterPage extends StatelessWidget {
                 onPressed: (){
                   Navigator.popUntil(context, (route) => route.isFirst);
                 },
-                child: const Text("Login"),
+                child: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 20),),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColor.mainColor,
+                ),
             ),
           ],
         ),

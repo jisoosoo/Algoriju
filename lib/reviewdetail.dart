@@ -1,3 +1,4 @@
+import 'package:algoriju/style.dart';
 import 'package:algoriju/writereview.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,13 @@ class ReviewDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("리뷰 상세"),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        title: const Text("리뷰 상세", style: TextStyle(color: Colors.white),),
+        backgroundColor: AppColor.mainColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -46,18 +52,17 @@ class ReviewDetailPage extends StatelessWidget {
                                   ),
                                   child: Center(
                                     child: Padding(
-                                      padding: const EdgeInsets.only(top: 16.0),
-                                      child: Column(
-                                        children: [
-                                          Text(docs[index]['userName'], style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(docs[index]['text'], style: const TextStyle(fontSize: 15),),
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            Text(docs[index]['userName'], style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(docs[index]['text'], style: const TextStyle(fontSize: 15),),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -83,6 +88,8 @@ class ReviewDetailPage extends StatelessWidget {
         },
         tooltip: '글쓰기',
         child: const Icon(Icons.border_color),
+        backgroundColor: AppColor.mainColor,
+        foregroundColor: Colors.white,
       ),
     );
   }

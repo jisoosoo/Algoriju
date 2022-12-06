@@ -1,5 +1,6 @@
 import 'package:algoriju/SuccessLogin.dart';
 import 'package:algoriju/registerpage.dart';
+import 'package:algoriju/style.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -10,8 +11,10 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Login"),
+        backgroundColor: AppColor.mainColor,
       ),
       body: const LoginForm(),
     );
@@ -91,7 +94,10 @@ class _LoginFormState extends State<LoginForm> {
                     print(e);
                   }
                 },
-                child: const Text("Enter"),
+                child: const Text("Enter",style: TextStyle(fontSize: 25, color: Colors.white),),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColor.mainColor,
+                ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -101,7 +107,7 @@ class _LoginFormState extends State<LoginForm> {
                     onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterPage()));
                     },
-                    child: const Text("Register your account"),
+                    child: const Text("Register your account", style: TextStyle(color: Colors.blue),),
                 ),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'package:algoriju/SuccessRegister.dart';
+import 'package:algoriju/style.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,8 +10,13 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Register"),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        title: const Text("Register", style: TextStyle(color: Colors.white),),
+        backgroundColor: AppColor.mainColor,
       ),
       body: const RegisterForm(),
     );
@@ -90,7 +96,10 @@ class _RegisterFormState extends State<RegisterForm> {
                   print(e);
                 }
               },
-              child: const Text("Enter"),
+              child: const Text("Enter", style: TextStyle(fontSize: 20, color: Colors.white),),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColor.mainColor,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -100,7 +109,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   onPressed: (){
                     Navigator.pop(context);
                   },
-                  child: const Text("Login"),
+                  child: const Text("Login", style: TextStyle(color: Colors.blue),),
                 ),
               ],
             ),

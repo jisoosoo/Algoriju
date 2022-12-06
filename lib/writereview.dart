@@ -1,3 +1,4 @@
+import 'package:algoriju/style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,10 +11,16 @@ class WriteReviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("리뷰 작성"),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        title: const Text("리뷰 작성", style: TextStyle(color: Colors.white),),
+        backgroundColor: AppColor.mainColor,
       ),
       body: ReviewForm(drink: drinkName,),
+      resizeToAvoidBottomInset: false,
     );
   }
 }
@@ -42,66 +49,74 @@ class _ReviewFormState extends State<ReviewForm> {
 
     String? drinkName = widget.drink;
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(drinkName!),
-          const SizedBox(
-            height: 24,
-          ),
-          SizedBox(
-            width: 400,
-            height: 200,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                controller: _reviewController,
-                inputFormatters: [
-                  FilteringTextInputFormatter.deny(RegExp('[\\@]')),
-                  FilteringTextInputFormatter.deny(RegExp('[\\#]')),
-                ],
-                minLines: 1,
-                maxLines: 20,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  hintText: "리뷰를 작성해주세요",
-                  hintStyle: TextStyle(
-                    color: Colors.grey
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(drinkName!, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+              const SizedBox(
+                height: 24,
+              ),
+              SizedBox(
+                width: 400,
+                height: 200,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextFormField(
+                    controller: _reviewController,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp('[\\@]')),
+                      FilteringTextInputFormatter.deny(RegExp('[\\#]')),
+                    ],
+                    minLines: 1,
+                    maxLines: 20,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: "리뷰를 작성해주세요",
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(width: 3, color: AppColor.mainColor),
+                      ),
+
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        newReview = value;
+                      });
+                    },
                   ),
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    newReview = value;
-                  });
-                },
               ),
-            ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                  onPressed: newReview.trim().isEmpty ? null : () async {
+                    final currentUser = FirebaseAuth.instance.currentUser;
+                    final currentUserName = await FirebaseFirestore.instance.collection('user').doc(currentUser!.uid).get();
+                    //final currentDrinkName = await FirebaseFirestore.instance.collection('Drink').doc('00').get();
+                    //print(currentDrinkName.data()!['type1']);
+                    FirebaseFirestore.instance.collection('review').add({
+                      'text': newReview,
+                      'userName' : currentUserName.data()!['userName'],
+                      'timeStamp' : Timestamp.now(),
+                      'uid' : currentUser.uid,
+                      'DrinkName' : drinkName,
+                      // currentDrinkName.data()!['name'],
+                    });
+                    Navigator.pop(context);
+                    },
+                child: const Text("작성 완료", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.white),),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColor.mainColor,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-              onPressed: newReview.trim().isEmpty ? null : () async {
-                final currentUser = FirebaseAuth.instance.currentUser;
-                final currentUserName = await FirebaseFirestore.instance.collection('user').doc(currentUser!.uid).get();
-                //final currentDrinkName = await FirebaseFirestore.instance.collection('Drink').doc('00').get();
-                //print(currentDrinkName.data()!['type1']);
-                FirebaseFirestore.instance.collection('review').add({
-                  'text': newReview,
-                  'userName' : currentUserName.data()!['userName'],
-                  'timeStamp' : Timestamp.now(),
-                  'uid' : currentUser.uid,
-                  'DrinkName' : drinkName,
-                  // currentDrinkName.data()!['name'],
-                });
-                Navigator.pop(context);
-                },
-              child: const Text("작성 완료", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
-          ),
-        ],
       ),
     );
   }
